@@ -16,16 +16,15 @@
   <!-- Navbar (sit on top) -->
   <div class="w3-top">
     <div class="w3-bar w3-white w3-card" id="myNavbar">
-      <img src="images/Lost&FoundIcon.jpg" href="#home" class="w3-bar-item w3-button logo">
+      <img src="images/logo.jpg" href="#home" class="w3-bar-item w3-button logo">
       <!-- Right-sided navbar links -->
       <div class="w3-right w3-hide-small">
         <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
-        <a href="#work" class="w3-bar-item w3-button"><i class="fa fa-th"></i> WORK</a>
+        <a href="#forum" class="w3-bar-item w3-button"><i class="fa fa-th"></i> FORUM</a>
         <a href="#sign" class="w3-bar-item w3-button"><i class="fa fa-user"></i> SIGN IN</a>
         <a href="#contact" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> CONTACT</a>
       </div>
       <!-- Hide right-floated links on small screens and replace them with a menu icon -->
-
       <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium"
         onclick="w3_open()">
         <i class="fa fa-bars"></i>
@@ -36,23 +35,21 @@
   <!-- Sidebar on small screens when clicking the menu icon -->
   <nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large"
     style="display:none" id="mySidebar">
-    <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a>
+    <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close X</a>
     <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">ABOUT</a>
-    <a href="#team" onclick="w3_close()" class="w3-bar-item w3-button">TEAM</a>
-    <a href="#work" onclick="w3_close()" class="w3-bar-item w3-button">WORK</a>
-    <a href="#pricing" onclick="w3_close()" class="w3-bar-item w3-button">PRICING</a>
+    <a href="#forum" onclick="w3_close()" class="w3-bar-item w3-button">Forum</a>
+    <a href="#pricing" onclick="w3_close()" class="w3-bar-item w3-button">SIGN IN</a>
     <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">CONTACT</a>
   </nav>
 
   <!-- Header with full-height image -->
   <header class="bgimg-1 w3-display-container w3-grayscale-min" id="home">
     <div class="w3-display-left w3-text-white" style="padding:48px">
-      <span class="w3-jumbo w3-hide-small">Start something that matters</span><br>
-      <span class="w3-xxlarge w3-hide-large w3-hide-medium">Start something that matters</span><br>
-      <span class="w3-large">Stop wasting valuable time with projects that just isn't you.</span>
+      <span class="w3-jumbo w3-hide-small">Losing Something?</span><br>
+      <span class="w3-xxlarge w3-hide-large w3-hide-medium">Losing Something?</span><br>
+      <span class="w3-large">Get yourself some help.</span>
       <p><a href="#about"
-          class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">Learn more
-          and start today</a></p>
+          class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">Check our forum</a></p>
     </div>
     <div class="w3-display-bottomleft w3-text-grey w3-large" style="padding:24px 48px">
       <i class="fa fa-facebook-official w3-hover-opacity"></i>
@@ -66,32 +63,23 @@
 
   <!-- About Section -->
   <div class="w3-container" style="padding:128px 16px" id="about">
-    <h3 class="w3-center">ABOUT THE COMPANY</h3>
-    <p class="w3-center w3-large">Key features of our company</p>
+    <h3 class="w3-center">ABOUT THE WEBSITE</h3>
+    <p class="w3-center w3-large">Key features of our website</p>
     <div class="w3-row-padding w3-center" style="margin-top:64px">
-      <div class="w3-quarter">
-        <i class="fa fa-desktop w3-margin-bottom w3-jumbo w3-center"></i>
-        <p class="w3-large">Responsive</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-          dolore.</p>
+      <div class="w3-third">
+        <i class="fa fa-lock w3-margin-bottom w3-jumbo w3-center"></i>
+        <p class="w3-large">Lost</p>
+        <p>Post descriptions on your lost item.</p>
       </div>
-      <div class="w3-quarter">
-        <i class="fa fa-heart w3-margin-bottom w3-jumbo"></i>
-        <p class="w3-large">Passion</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-          dolore.</p>
+      <div class="w3-third">
+        <i class="fa fa-key w3-margin-bottom w3-jumbo"></i>
+        <p class="w3-large">Found</p>
+        <p>Post descriptions on your found item.</p>
       </div>
-      <div class="w3-quarter">
-        <i class="fa fa-diamond w3-margin-bottom w3-jumbo"></i>
-        <p class="w3-large">Design</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-          dolore.</p>
-      </div>
-      <div class="w3-quarter">
-        <i class="fa fa-cog w3-margin-bottom w3-jumbo"></i>
-        <p class="w3-large">Support</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-          dolore.</p>
+      <div class="w3-third">
+        <i class="fa fa-unlock w3-margin-bottom w3-jumbo"></i>
+        <p class="w3-large">Matching</p>
+        <p>Matching descriptions that matches.</p>
       </div>
     </div>
   </div>
@@ -108,58 +96,6 @@
       <div class="w3-col m6">
         <img class="w3-image w3-round-large" src="/w3images/phone_buildings.jpg" alt="Buildings" width="700"
           height="394">
-      </div>
-    </div>
-  </div>
-
-  <!-- Team Section -->
-  <div class="w3-container" style="padding:128px 16px" id="team">
-    <h3 class="w3-center">THE TEAM</h3>
-    <p class="w3-center w3-large">The ones who runs this company</p>
-    <div class="w3-row-padding w3-grayscale" style="margin-top:64px">
-      <div class="w3-col l3 m6 w3-margin-bottom">
-        <div class="w3-card">
-          <img src="/w3images/team2.jpg" alt="John" style="width:100%">
-          <div class="w3-container">
-            <h3>John Doe</h3>
-            <p class="w3-opacity">CEO & Founder</p>
-            <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-            <p><button class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> Contact</button></p>
-          </div>
-        </div>
-      </div>
-      <div class="w3-col l3 m6 w3-margin-bottom">
-        <div class="w3-card">
-          <img src="/w3images/team1.jpg" alt="Jane" style="width:100%">
-          <div class="w3-container">
-            <h3>Anja Doe</h3>
-            <p class="w3-opacity">Art Director</p>
-            <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-            <p><button class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> Contact</button></p>
-          </div>
-        </div>
-      </div>
-      <div class="w3-col l3 m6 w3-margin-bottom">
-        <div class="w3-card">
-          <img src="/w3images/team3.jpg" alt="Mike" style="width:100%">
-          <div class="w3-container">
-            <h3>Mike Ross</h3>
-            <p class="w3-opacity">Web Designer</p>
-            <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-            <p><button class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> Contact</button></p>
-          </div>
-        </div>
-      </div>
-      <div class="w3-col l3 m6 w3-margin-bottom">
-        <div class="w3-card">
-          <img src="/w3images/team4.jpg" alt="Dan" style="width:100%">
-          <div class="w3-container">
-            <h3>Dan Star</h3>
-            <p class="w3-opacity">Designer</p>
-            <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-            <p><button class="w3-button w3-light-grey w3-block"><i class="fa fa-envelope"></i> Contact</button></p>
-          </div>
-        </div>
       </div>
     </div>
   </div>
