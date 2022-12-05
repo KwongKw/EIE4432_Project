@@ -3,14 +3,13 @@ require('db.php');
 
 if (!isset($_POST['uid'], $_POST['password'])) {
     // Could not get the data that should have been sent.
-    echo '<script>alert("Please complete the registration form")</script>';
-    exit('Please complete the registration form!');
+    echo json_encode("Please complete the registration form");
 }
 // Make sure the submitted registration values are not empty.
 if (empty($_POST['uid'] || $_POST['password'])) {
     // One or more values are empty.
-    echo '<script>alert("Please complete the registration form")</script>';
-    exit('Please complete the registration form');
+    echo json_encode("Please complete the registration form");
+
 }
 
 // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
@@ -29,19 +28,28 @@ if ($stmt = $con->prepare('SELECT uid, password FROM UserRecords WHERE uid = ?')
         if ($_POST['password'] == $password) {
             // Verification success! User has logged-in!
             // Create sessions, so we know the user is logged in, they basically act like cookies but remember the data on the server.
-            session_regenerate_id();
-            if ($_POST['remember'] == TRUE)
-                $_SESSION['loggedin'] = TRUE;
-            $_SESSION['name'] = $username;
             $_SESSION['uid'] = $_POST['uid'];
-            echo '<script>alert("Welcome ' . $_SESSION['name'] . '!")</script>';
+            $_SESSION['password'] = $_POST['password'];
+            $_SESSION['name'] = $username;
+
+            //cookies
+            if(isset($_POST["remember"])) {
+                setcookie ('uid',$_POST['uid'],time()+ 3600,'/');
+                setcookie ('password',$_POST['password'],time()+ 3600,'/');
+                setcookie ('username',$username,time()+ 3600,'/');
+            } else {
+                setcookie('uid', '', 0, '/');
+                setcookie('username','', 0, '/');
+                setcookie('password','', 0, '/');
+            }
+            echo json_encode("Success");
         } else {
             // Incorrect password
-            echo '<script>alert("Incorrect username and/or password!")</script>';
+            echo json_encode("Incorrect username and/or password!");
         }
     } else {
         // Incorrect username
-        echo '<script>alert("Incorrect username and/or password!")</script>';
+        echo json_encode("Incorrect username and/or password!");
     }
 
     $stmt->close();
