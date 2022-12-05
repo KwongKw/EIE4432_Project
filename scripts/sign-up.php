@@ -46,10 +46,10 @@ if ($stmt = $con->prepare('SELECT uid, password FROM UserRecords WHERE uid = ?')
         echo '<script>alert("User ID exists, please choose another!")</script>';
     } else {
         // UID doesnt exists, insert new account
-        if ($stmt = $con->prepare('INSERT INTO UserRecords (uid, password, username, email, gender, birthday) VALUES (?, ?, ?, ?, ?, ?)')) {
+        if ($stmt = $con->prepare('INSERT INTO UserRecords (uid, password, username, email, birthday, gender) VALUES (?, ?, ?, ?, ?, ?)')) {
             // We do not want to expose passwords in our database, so hash the password and use password_verify when a user logs in.
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-            $stmt->bind_param('ssssss', $_POST['uid'], $password, $_POST['username'], $_POST['email'], $_POST['gender'], $_POST['birthday']);
+            $stmt->bind_param('ssssss', $_POST['uid'], $password, $_POST['username'], $_POST['email'], $_POST['birthday'], $_POST['gender']);
             $stmt->execute();
             echo '<script>alert("You have successfully registered, you can now login!")</script>';
         } else {

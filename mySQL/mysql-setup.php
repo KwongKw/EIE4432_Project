@@ -4,6 +4,13 @@ $user = "root";
 $pw = ""; // by default xammp root user has no password
 $db = "Project";
 
+$uid = 'admin';
+$password = '12345';
+$username = 'admin';
+$email = '19067393d@connect.polyu.hk';
+$gender = 'O';
+$birthday = 0;
+
 $connect = mysqli_connect($server, $user, $pw, $db);
 
 if (!$connect) {
@@ -28,8 +35,8 @@ $createPersonnelTable = "CREATE TABLE UserRecords (
   PRIMARY KEY (`uid`)
  ) ENGINE='MyISAM'  DEFAULT CHARSET='latin1'";
 
-$addPersonnelRecords = "REPLACE INTO UserRecords (`uid`, `password`, `username`, `email`, `birthday`, `gender`) VALUES
-('admin', '12345', 'na', 'na', 0, 'O')";
+$addPersonnelRecords = "REPLACE INTO UserRecords (uid, password, username, email, gender, birthday) VALUES
+(?, ?, ?, ?, ?, ?)";
 
 $result = mysqli_query($connect, $createAccount);
 
@@ -45,10 +52,10 @@ if (!$result) {
     if (!$result) {
       die("Could not successfully run query ($createPersonnelTable) from $db: " . mysqli_error($connect));
     } else {
-      $result = mysqli_query($connect, $addPersonnelRecords);
-      if (!$result) {
-        die("Could not successfully run query ($addPersonnelRecords) from $db: " . mysqli_error($connect));
-      } else {
+      if ($stmt = $connect->prepare($addPersonnelRecords)) {
+        // We do not want to expose passwords in our database, so hash the password and use password_verify when a user logs in.
+        $stmt->bind_param('ssssss', $uid, $password, $username, $email, $gender, $birthday);
+        $stmt->execute();
         print("<html><head><title>MySQL Setup</title></head>
 							<body><h1>MySQL Setup: SUCCESS!</h1><p>Created MySQL user <strong>wbip</strong> with 
 							password <strong>wbip123</strong>, with all privileges on the 
@@ -56,6 +63,9 @@ if (!$result) {
 							and <strong>timesheet</strong> in the 
 							<strong>test</strong> database.</p>
 							</body></html>");
+      }
+      else{
+        die("Could not successfully run query ($addPersonnelRecords) from $db: " . mysqli_error($connect));
       }
     }
   }

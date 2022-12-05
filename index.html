@@ -16,7 +16,6 @@
 </head>
 
 <body>
-
   <!-- Navbar (sit on top) -->
   <div class="w3-top">
     <div class="w3-bar w3-white w3-card" id="myNavbar">
@@ -54,7 +53,7 @@
 
   <!-- Header with full-height image -->
   <header class="bgimg-1 w3-display-container w3-grayscale-min" id="home">
-    <div class="w3-display-left w3-text-white" style="padding:48px">
+    <div class="w3-display-right w3-text-white" style="text-align: right; padding:48px">
       <span class="w3-jumbo w3-hide-small">Losing Something?</span><br>
       <span class="w3-xxlarge w3-hide-large w3-hide-medium">Losing Something?</span><br>
       <span class="w3-large">Get yourself some help.</span>
@@ -98,7 +97,8 @@
   <!-- Sign in Section-->
   <div id="sign-in" class="w3-modal modal">
     <!-- Modal Content -->
-    <form class="w3-modal-content w3-animate-opacity modal-content" action="scripts/sign-in.php" method="post">
+    <form class="w3-modal-content w3-animate-opacity modal-content" action="scripts/sign-in.php" method="post"
+      target="dummy">
       <div class="w3-container">
         <span onclick="document.getElementById('sign-in').style.display='none'" class="modal-close"
           title="Close Modal">&times;</span>
@@ -114,8 +114,8 @@
       </div>
 
       <div class="w3-container modal-container">
-        <label class="modal-label" for="psw"><b>Password</b></label><br>
-        <input class="modal-input" type="password" placeholder="Enter Password" name="psw" required><br>
+        <label class="modal-label" for="password"><b>Password</b></label><br>
+        <input class="modal-input" type="password" placeholder="Enter Password" name="password" required><br>
       </div>
 
       <div class="w3-container modal-container">
@@ -125,7 +125,7 @@
         </div>
 
         <div class="w3-half" style="text-align: right">
-          <span class="psw">Forgot <a href="#">password?</a></span>
+          <span class="password">Forgot <a href="#">password?</a></span>
         </div>
       </div>
 
@@ -140,10 +140,12 @@
   <!-- Sign up Section-->
   <div id="sign-up" class="w3-modal modal">
     <!-- Modal Content -->
-    <form class="w3-modal-content w3-animate-opacity modal-content" action="scripts/sign-up.php" method="post" autocomplete="off" target="dummy">
+    <form class="w3-modal-content w3-animate-opacity modal-content" action="scripts/sign-up.php" method="post"
+      autocomplete="off" target="dummy">
       <div class="w3-container">
-        <span onclick="document.getElementById('sign-up').style.display='none'; document.getElementById('sign-in').style.display='block'" class="modal-back"
-          title="Back Modal">&#x25c0;</span>
+        <span
+          onclick="document.getElementById('sign-up').style.display='none'; document.getElementById('sign-in').style.display='block'"
+          class="modal-back" title="Back Modal">&#x25c0;</span>
       </div>
 
       <div class="w3-container modal-container">
