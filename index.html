@@ -38,6 +38,8 @@
     </div>
   </div>
 
+  <iframe name="dummy" style="display:none;"></iframe>
+
   <!-- Sidebar on small screens when clicking the menu icon -->
   <nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large"
     style="display:none" id="mySidebar">
@@ -138,7 +140,7 @@
   <!-- Sign up Section-->
   <div id="sign-up" class="w3-modal modal">
     <!-- Modal Content -->
-    <form class="w3-modal-content w3-animate-opacity modal-content" action="scripts/sign-up.php" method="post">
+    <form class="w3-modal-content w3-animate-opacity modal-content" action="scripts/sign-up.php" method="post" autocomplete="off" target="dummy">
       <div class="w3-container">
         <span onclick="document.getElementById('sign-up').style.display='none'; document.getElementById('sign-in').style.display='block'" class="modal-back"
           title="Back Modal">&#x25c0;</span>
@@ -150,13 +152,13 @@
       </div>
 
       <div class="w3-container modal-container">
-        <label class="modal-label" for="psw"><b>Password</b></label><br>
-        <input class="modal-input" type="password" placeholder="Enter Your Password" name="psw" required><br>
+        <label class="modal-label" for="password"><b>Password</b></label><br>
+        <input class="modal-input" type="password" placeholder="Enter Your Password" name="password" required><br>
       </div>
 
       <div class="w3-container modal-container">
-        <label class="modal-label" for="uname"><b>Nick Name</b></label><br>
-        <input class="modal-input" type="text" placeholder="Enter your Nick Name" name="uname" required><br>
+        <label class="modal-label" for="username"><b>Nick Name</b></label><br>
+        <input class="modal-input" type="text" placeholder="Enter your Nick Name" name="username" required><br>
       </div>
 
       <div class="w3-container modal-container">
@@ -168,16 +170,16 @@
         <label class="modal-label" for="gender"><b>Gender</b></label><br>
         <select class="modal-input" type="select" name="gender" required>
           <option disabled selected value> -- select an option -- </option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="other">other</option>
+          <option value="M">Male</option>
+          <option value="F">Female</option>
+          <option value="O">other</option>
         </select>
         <br>
       </div>
 
       <div class="w3-container modal-container">
-        <label class="modal-label" for="bod"><b>Birthday</b></label><br>
-        <input class="modal-input" type="date" name="bod" required><br>
+        <label class="modal-label" for="birthday"><b>Birthday</b></label><br>
+        <input class="modal-input" type="date" name="birthday" required><br>
       </div>
 
 
