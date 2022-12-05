@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="styles/raleway.css">
   <link rel="stylesheet" href="styles/font-awesome.min.css">
   <link rel="stylesheet" href="styles/w3.css">
-  <link rel="stylesheet" href="styles/template.css">
+  <link rel="stylesheet" href="styles/style.css">
 </head>
 
 <body>
@@ -39,8 +39,8 @@
     <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close X</a>
     <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">ABOUT</a>
     <a href="#forum" onclick="w3_close()" class="w3-bar-item w3-button">Forum</a>
-    <a href="#pricing" onclick="w3_close(); document.getElementById('sign-in').style.display='block'"
-      class="w3-bar-item w3-button">SIGN IN</a>
+    <a onclick="w3_close(); document.getElementById('sign-in').style.display='block'" class="w3-bar-item w3-button">SIGN
+      IN</a>
     <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">CONTACT</a>
   </nav>
 
@@ -88,34 +88,87 @@
   </div>
 
   <!-- Sign in Section-->
-  <div id="sign-in" class="w3-modal">
-    <span onclick="document.getElementById('sign-in').style.display='none'" class="close"
-      title="Close Modal">&times;</span>
-
+  <div id="sign-in" class="w3-modal modal">
     <!-- Modal Content -->
-    <form class="w3-modal-content w3-animate" action="/action_page.php">
-      <div>
-        <i class="fa fa-user w3-margin-bottom w3-jumbo w3-center"></i>
-      </div>
-
+    <form class="w3-modal-content w3-animate-opacity modal-content" action="scripts/sign-in.php" method="post">
       <div class="w3-container">
-        <label for="uname"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="uname" required>
-
-        <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" required>
-
-        <button type="submit">Login</button>
-        <label>
-          <input type="checkbox" checked="checked" name="remember"> Remember me
-        </label>
+        <span onclick="document.getElementById('sign-in').style.display='none'" class="modal-close"
+          title="Close Modal">&times;</span>
       </div>
 
-      <div class="w3-container" style="background-color:#f1f1f1">
-        <button type="button" onclick="document.getElementById('sign-in').style.display='none'"
-          class="cancelbtn">Cancel</button>
-        <span class="psw">Forgot <a href="#">password?</a></span>
+      <div class="modal-logo">
+        <i class="fa fa-user w3-margin-bottom w3-center extra-large"></i>
       </div>
+
+      <div class="w3-container modal-container">
+        <label class="modal-label" for="uname"><b>Username</b></label><br>
+        <input class="modal-input" type="text" placeholder="Enter Username" name="uname" required><br>
+      </div>
+
+      <div class="w3-container modal-container">
+        <label class="modal-label" for="psw"><b>Password</b></label><br>
+        <input class="modal-input" type="password" placeholder="Enter Password" name="psw" required><br>
+      </div>
+
+      <div class="w3-container modal-container">
+        <button class="w3-button modal-button" type="submit">Login</button>
+        <div class="w3-half">
+          <label><input type="checkbox" checked="checked" name="remember"> Remember me</label>
+        </div>
+
+        <div class="w3-half" style="text-align: right">
+          <span class="psw">Forgot <a href="#">password?</a></span>
+        </div>
+      </div>
+
+      <div class="w3-container modal-container-last">
+        <span class="psw">Don't have an account? <a href="#"
+            onclick="document.getElementById('sign-in').style.display='none'; document.getElementById('sign-up').style.display='block'"
+            class="modal-hypertext">Sign Up</a></span>
+      </div>
+    </form>
+  </div>
+
+  <!-- Sign up Section-->
+  <div id="sign-up" class="w3-modal modal">
+    <!-- Modal Content -->
+    <form class="w3-modal-content w3-animate-opacity modal-content" action="scripts/sign-up.php" method="post">
+      <div class="w3-container">
+        <span onclick="document.getElementById('sign-up').style.display='none'" class="modal-close"
+          title="Close Modal">&times;</span>
+      </div>
+
+      <div class="modal-logo">
+        <i class="fa fa-user w3-margin-bottom w3-center extra-large"></i>
+      </div>
+
+      <div class="w3-container modal-container">
+        <label class="modal-label" for="uname"><b>Username</b></label><br>
+        <input class="modal-input" type="text" placeholder="Enter Username" name="uname" required><br>
+      </div>
+
+      <div class="w3-container modal-container">
+        <label class="modal-label" for="psw"><b>Password</b></label><br>
+        <input class="modal-input" type="password" placeholder="Enter Password" name="psw" required><br>
+      </div>
+
+      <div class="w3-container modal-container">
+        <button class="w3-button modal-button" type="submit">Sign Up</button>
+        <div class="w3-half">
+          <label><input type="checkbox" checked="checked" name="remember"> Remember me</label>
+        </div>
+
+        <div class="w3-half" style="text-align: right">
+          <span class="psw">Forgot <a href="#">password?</a></span>
+        </div>
+      </div>
+
+      <div class="w3-container modal-container-last">
+        <span class="psw">Already have an account? <a href="#"
+            onclick="document.getElementById('sign-up').style.display='none'; document.getElementById('sign-in').style.display='block'"
+            class="modal-hypertext">Login here</a></span>
+      </div>
+
     </form>
   </div>
 
@@ -192,6 +245,8 @@
         modal.style.display = "none";
       }
     }
+
+
   </script>
 
 </body>

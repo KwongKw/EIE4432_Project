@@ -1,0 +1,93 @@
+body,h1,h2,h3,h4,h5,h6 {font-family: "Arial", sans-serif}
+
+body, html {
+  height: 100%;
+  line-height: 1.8;
+}
+
+/* Full height image header */
+.bgimg-1 {
+  background-position: center;
+  background-size: cover;
+  background-image: url("../images/background_1.jpg");
+  min-height: 100%;
+}
+
+.logo {
+  max-width: 200px;
+  max-height: 43px;
+  padding: 0px !important;
+}
+
+.extra-large {
+  font-size: 200px;
+}
+
+/* modal */
+.modal-content{
+  width: 350px;
+}
+
+.modal-container,
+.modal-container-last{
+  margin-top: 12px;
+}
+
+.modal-container-last{
+  text-align: center;
+  background-color:#f1f1f1;
+}
+
+.modal-logo {
+  text-align: center;
+  margin-top: 24px;
+}
+
+/* The Close Button */
+.modal-close {
+  /* Position it in the top right corner outside of the modal */
+  position: absolute;
+  right: 20px;
+  top: -20px;
+  color: #000;
+  font-size: 50px;
+  font-weight: bold;
+}
+
+/* Close button on hover */
+.modal-close:hover,
+.modal-close:focus {
+  color: red;
+  cursor: pointer;
+}
+
+.modal-label{
+  font-size: 18px;
+  text-align: left;
+  font-style: bold;
+}
+
+.modal-input{
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.modal-button{
+  background-color:#40c000;
+  font-weight: bold;
+  color: white;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.modal-hypertext{
+  color: blue;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+.modal-hypertext:hover{
+  color: darkblue;
+  background-color: transparent;
+  text-decoration: underline;
+}
