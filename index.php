@@ -93,7 +93,8 @@ if (!empty($_COOKIE['uid'])) {
       <div class="col-md-6">
         <div class="w3-right-align" style="padding-top: 20px;">
           <div>
-            <a href="#forum" data-bs-toggle="modal" data-bs-target=".add-new" class="w3-button forum-button"><i class="fa fa-dropbox"></i> Add New</a>
+            <a href="#forum" data-bs-toggle="modal" data-bs-target=".add-new" class="w3-button forum-button"><i
+                class="fa fa-dropbox"></i> Add New</a>
           </div>
         </div>
       </div>
@@ -105,14 +106,16 @@ if (!empty($_COOKIE['uid'])) {
             <table class="table table-nowrap align-middle table-borderless" style="padding-top: 20px;">
               <thead>
                 <tr>
+                  <th scope="col">Case ID</th>
+                  <th scope="col">User ID</th>
                   <th scope="col">Topic</th>
-                  <th scope="col">Position</th>
                   <th scope="col">Description</th>
-                  <th scope="col">Time</th>
+                  <th scope="col">Response</th>
                   <th scope="col" style="width: 200px;">Action</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="forum-content" name="forum-content">
+                <!--
                 <tr>
                   <td><a>Simon Ryles</a></td>
                   <td><span class="badge badge-soft-success mb-0">Full Stack Developer</span></td>
@@ -129,6 +132,7 @@ if (!empty($_COOKIE['uid'])) {
                     </ul>
                   </td>
                 </tr>
+                -->
               </tbody>
             </table>
           </div>
@@ -331,6 +335,16 @@ if (!empty($_COOKIE['uid'])) {
   </div>
 
   <script>
+
+    $(function () {
+      const xhttp = new XMLHttpRequest();
+      xhttp.onload = function () {
+        document.getElementById("forum-content").innerHTML = this.responseText;
+      }
+      xhttp.open("GET", "scripts/get-forum.php");
+      xhttp.send();
+    });
+
     // Modal Image Gallery
     function onClick(element) {
       document.getElementById("img01").src = element.src;
@@ -436,6 +450,7 @@ if (!empty($_COOKIE['uid'])) {
         modal2.style.display = "none";
       }
     }
+
   </script>
 
 </body>
