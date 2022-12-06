@@ -15,7 +15,7 @@ if (empty($_POST['response'])) {
     die();
 }
 
-$sql = "UPDATE ForumRecords SET `response` = '". $_POST['response'] ."' WHERE id = '". $_POST["id"] ."'";
+$sql = "UPDATE ForumRecords SET `response` = '". $_POST['response'] ."', `ruid` = '". $_SESSION['uid']."' WHERE id = '". $_POST["id"] ."'";
 
 if ($con->query($sql) == TRUE) {
     echo json_encode("Record updated successfully");

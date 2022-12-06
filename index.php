@@ -340,7 +340,7 @@ if (!empty($_COOKIE['uid'])) {
       </div>
 
       <div class="w3-container modal-container">
-        <button onclick="signout();" style="background-color: red;" class="w3-button modal-button" type="submit">LOG
+        <button onclick="signout();" style="background-color: red;" class="w3-button modal-button">LOG
           OUT</button>
       </div>
 
@@ -354,7 +354,7 @@ if (!empty($_COOKIE['uid'])) {
     <form id="profileForgot" name="profileForgot" class="w3-modal-content w3-animate-opacity modal-content"
       action="scripts/update.php" method="post" autocomplete="off">
       <div class="w3-container">
-        <span onclick="document.getElementById('profile').style.display='none';" class="modal-back"
+        <span onclick="document.getElementById('forgot').style.display='none';" class="modal-back"
           title="Back Modal">&times;</span>
       </div>
 
@@ -592,7 +592,7 @@ if (!empty($_COOKIE['uid'])) {
 
       // Fire off the request
       request = $.ajax({
-        url: "scripts/update.php",
+        url: "scripts/forgot.php",
         type: "post",
         data: serializedData
       });

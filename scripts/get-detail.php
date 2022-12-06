@@ -1,5 +1,6 @@
 <?php
 require("db.php");
+session_start();
 $sql = "SELECT * FROM ForumRecords WHERE id = ".$_GET["q"]."";
 $stmt = mysqli_query($con, $sql);
 while ($row = mysqli_fetch_assoc($stmt)) { // Important line !!!
@@ -25,7 +26,10 @@ while ($row = mysqli_fetch_assoc($stmt)) { // Important line !!!
     <input type="hidden" name="id" value='. $row['id'] .'>
     </div>
     <div class="w3-container modal-container-last">
-    <button class="w3-button modal-button" type="submit" style="margin-bottom: 20px">Submit</button>
+    <button ';
+        if (empty($_SESSION['uid'])) {
+            echo 'disabled';}
+    echo ' class="w3-button modal-button" type="submit" style="margin-bottom: 20px">Submit</button>
     </div>
     ';
     } else {
