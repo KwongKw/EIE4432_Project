@@ -1,4 +1,5 @@
 <?php
+session_start();
 unset($_SESSION['uid']);
 unset($_SESSION['password']);
 unset($_SESSION['username']);
@@ -71,7 +72,7 @@ if (!empty($_COOKIE['uid'])) {
       <span class="w3-jumbo w3-hide-small">Losing Something?</span><br>
       <span class="w3-xxlarge w3-hide-large w3-hide-medium">Losing Something?</span><br>
       <span class="w3-large">Get yourself some help.</span>
-      <p><a href="#about"
+      <p><a href="#forum"
           class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">Check our
           forum</a></p>
     </div>
@@ -90,7 +91,7 @@ if (!empty($_COOKIE['uid'])) {
     <div class="w3-row w3-centered">
       <div class="col-lg-6">
         <div class="mb-3">
-          <h4 class="forum-title">Records <span class="text-muted fw-normal ms-2">(???)</span></h5>
+          <h4 class="forum-title"><b>FORUM</b></h4>
         </div>
       </div>
       <div class="col-md-6">
@@ -126,28 +127,6 @@ if (!empty($_COOKIE['uid'])) {
               </tbody>
             </table>
           </div>
-        </div>
-      </div>
-    </div>
-    <div class="w3-row w3-centered">
-      <div class="col-lg-6">
-        <div>
-          <p class="mb-sm-0">Showing 1 to 10 of ?? entries</p>
-        </div>
-      </div>
-      <div class="col-sm-6">
-        <div class="w3-right-align">
-          <ul class="pagination mb-sm-0">
-            <li class="page-item disabled">
-              <a href="#" class="page-link"><i class="mdi mdi-chevron-left"></i></a>
-            </li>
-            <li class="page-item active"><a href="#" class="page-link">1</a></li>
-            <li class="page-item"><a href="#" class="page-link">2</a></li>
-
-            <li class="page-iten">
-              <a href="#" class="page-link"><i class="mdi mdi-chevron-right"></i></a>
-            </li>
-          </ul>
         </div>
       </div>
     </div>
@@ -340,9 +319,10 @@ if (!empty($_COOKIE['uid'])) {
       </div>
 
       <div class="w3-container modal-container-forum">
-        <label class="modal-label" for="description"><b>Description</b></label><br>
-        <textarea rows="6" cols="105" placeholder="Describe on something that can help on finding your lost item"
-          name="description" required></textarea><br>
+        <label class="modal-label " for="description"><b>Description</b></label><br>
+        <textarea class="forum-modal-input" rows="6"
+          placeholder="Describe on something that can help on finding your lost item" name="description"
+          required></textarea><br>
       </div>
 
       <div class="w3-container modal-container-last">
@@ -548,6 +528,17 @@ if (!empty($_COOKIE['uid'])) {
       }
       xhttp.open("GET", "scripts/get-detail.php?q=" + id);
       xhttp.send();
+    }
+
+    function del(id) {
+      if (confirm('Are you sure you want to delete this record?')) {
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function () {
+        }
+        xhttp.open("GET", "scripts/delete.php?q=" + id);
+        xhttp.send();
+      }
+      window.location.reload();
     }
 
   </script>
