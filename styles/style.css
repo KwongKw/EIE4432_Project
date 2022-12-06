@@ -130,3 +130,7 @@ html {
   font-weight: bold;
   color: white;
 }
+
+.forum-modal-content {
+  width: 600px;
+}

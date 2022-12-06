@@ -38,9 +38,9 @@ if ($stmt = $con->prepare('SELECT uid, password FROM UserRecords WHERE uid = ?')
                 setcookie ('password',$_POST['password'],time()+ 3600,'/');
                 setcookie ('username',$username,time()+ 3600,'/');
             } else {
-                setcookie('uid', '', 0, '/');
-                setcookie('username','', 0, '/');
-                setcookie('password','', 0, '/');
+                setcookie ('uid',$_POST['uid'],time()+ 2,'/');
+                setcookie ('password',$_POST['password'],time()+ 2,'/');
+                setcookie ('username',$username,time()+ 2,'/');
             }
             echo json_encode("Success");
         } else {

@@ -1,4 +1,8 @@
-<?php session_start();
+<?php
+
+unset($_SESSION['uid']);
+unset($_SESSION['password']);
+unset($_SESSION['username']);
 if (!empty($_COOKIE['uid'])) {
   $_SESSION['uid'] = $_COOKIE['uid'];
   $_SESSION['password'] = $_COOKIE['password'];
@@ -32,7 +36,7 @@ if (!empty($_COOKIE['uid'])) {
         <a href="#forum" class="w3-bar-item w3-button"><i class="fa fa-th"></i> FORUM</a>
 
         <!--show account-->
-        <?php if (empty($_COOKIE['uid'])): ?>
+        <?php if (empty($_SESSION['uid'])): ?>
         <a onclick="document.getElementById('sign-in').style.display='block'" class="w3-bar-item w3-button"><i
             class="fa fa-user"></i> SIGN IN</a>
         <?php else: ?>
@@ -93,8 +97,13 @@ if (!empty($_COOKIE['uid'])) {
       <div class="col-md-6">
         <div class="w3-right-align" style="padding-top: 20px;">
           <div>
-            <a href="#forum" data-bs-toggle="modal" data-bs-target=".add-new" class="w3-button forum-button"><i
+            <?php if (empty($_SESSION['uid'])): ?>
+            <a onclick="alert('Please Login First')" class="w3-button forum-button"><i class="fa fa-dropbox"></i> Add
+              New</a>
+            <?php else: ?>
+            <a onclick="document.getElementById('add').style.display='block'" class="w3-button forum-button"><i
                 class="fa fa-dropbox"></i> Add New</a>
+            <?php endif; ?>
           </div>
         </div>
       </div>
@@ -115,24 +124,6 @@ if (!empty($_COOKIE['uid'])) {
                 </tr>
               </thead>
               <tbody id="forum-content" name="forum-content">
-                <!--
-                <tr>
-                  <td><a>Simon Ryles</a></td>
-                  <td><span class="badge badge-soft-success mb-0">Full Stack Developer</span></td>
-                  <td>SimonRyles@minible.com</td>
-                  <td>125</td>
-                  <td>
-                    <ul class="list-inline">
-                      <li class="list-inline-item">
-                        <a href="javascript:void(0);"><i class="fa fa-arrow-circle-o-up"></i></a>
-                      </li>
-                      <li class="list-inline-item">
-                        <a href="javascript:void(0);"><i class="fa fa-hand-o-up"></i></a>
-                      </li>
-                    </ul>
-                  </td>
-                </tr>
-                -->
               </tbody>
             </table>
           </div>
@@ -334,6 +325,34 @@ if (!empty($_COOKIE['uid'])) {
     </form>
   </div>
 
+  <!-- Add Section-->
+  <div id="add" name="add" class="w3-modal modal">
+    <!-- Modal Content -->
+    <form id="addforum" name="addforum" class="w3-modal-content w3-animate-opacity forum-modal-content"
+      action="scripts/add-forum.php" method="post" autocomplete="off">
+      <div class="w3-container">
+        <span onclick="document.getElementById('add').style.display='none';" class="modal-back"
+          title="Back Modal">&times;</span>
+      </div>
+
+      <div class="w3-container modal-container">
+        <label class="modal-label" for="topic"><b>Topic</b></label><br>
+        <input class="modal-input" type="text" placeholder="Enter Your Lost Item" name="topic" required><br>
+      </div>
+
+      <div class="w3-container modal-container-forum">
+        <label class="modal-label" for="description"><b>Description</b></label><br>
+        <textarea rows="6" cols="105" placeholder="Describe on something that can help on finding your lost item"
+          name="description" required></textarea><br>
+      </div>
+
+      <div class="w3-container modal-container-last">
+        <button class="w3-button modal-button" type="submit" style="margin-bottom: 20px">Submit</button>
+      </div>
+
+    </form>
+  </div>
+
   <script>
 
     $(function () {
@@ -421,6 +440,35 @@ if (!empty($_COOKIE['uid'])) {
       window.location.reload();
     }
 
+    $("#addforum").submit(function (event) {
+
+      event.preventDefault();
+      var $form = $(this);
+      var $inputs = $form.find("input, select, button, textarea, checkbox");
+      var serializedData = $form.serialize();
+      $inputs.prop("disabled", true);
+
+      // Fire off the request
+      request = $.ajax({
+        url: "scripts/add-forum.php",
+        type: "post",
+        data: serializedData
+      });
+
+      request.done(function (response) {
+        if (response == '"Upload Success, please wait patiently"') {
+          window.location.reload();
+        }
+          window.alert(response);
+      });
+
+      request.always(function () {
+        // Reenable the inputs
+        $inputs.prop("disabled", false);
+      });
+
+    });
+
     // Toggle between showing and hiding the sidebar when clicking the menu icon
     var mySidebar = document.getElementById("mySidebar");
 
@@ -440,6 +488,7 @@ if (!empty($_COOKIE['uid'])) {
     // Get the modal
     var modal1 = document.getElementById('sign-in');
     var modal2 = document.getElementById('sign-up');
+    var modal2 = document.getElementById('add');
 
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function (event) {
@@ -448,6 +497,9 @@ if (!empty($_COOKIE['uid'])) {
       }
       if (event.target == modal2) {
         modal2.style.display = "none";
+      }
+      if (event.target == modal3) {
+        modal3.style.display = "none";
       }
     }
 
