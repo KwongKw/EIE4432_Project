@@ -19,7 +19,7 @@ while ($row = mysqli_fetch_assoc($stmt)) { // Important line !!!
     </div>';
 
     if (empty($row['response'])) {
-        echo '<div class="w3-container modal-container-forum">
+        echo '<div class="w3-container modal-container">
     <label class="modal-label" for="response"><b>Response</b></label><br>
     <textarea class="forum-modal-input" rows="6" placeholder="Describe on something that can help on finding your lost item"
       name="response" required></textarea><br>

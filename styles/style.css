@@ -139,3 +139,8 @@ html {
   width: 100%;
   box-sizing: border-box;
 }
+
+/* panel */
+.input-search{
+  width: 200px !important;
+}

@@ -2,7 +2,7 @@
 session_start();
 
 require("db.php");
-$sql = "SELECT `id`, `uid`, `topic`, `description`, `response` FROM ForumRecords";
+$sql = "SELECT `id`, `uid`, `topic`, `description`, `response` FROM ForumRecords WHERE (`uid` LIKE  '%".$_REQUEST['q']."%' OR  `ruid` LIKE '%".$_REQUEST['q']."%')";
 $stmt = mysqli_query($con, $sql);
 while ($row = mysqli_fetch_assoc($stmt)) { // Important line !!!
     echo "<tr>";
