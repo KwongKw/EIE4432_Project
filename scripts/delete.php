@@ -13,6 +13,7 @@ if ($con->query($sql) == TRUE) {
     }
 } else {
     echo json_encode("Error updating record: ");
+    die();
 }
 $con->close();
 ?>

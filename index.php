@@ -40,7 +40,8 @@ if (!empty($_COOKIE['uid'])) {
         <a onclick="document.getElementById('sign-in').style.display='block'" class="w3-bar-item w3-button"><i
             class="fa fa-user"></i> SIGN IN</a>
         <?php else: ?>
-        <a onclick="signout()" class="w3-bar-item w3-button"><i class="fa fa-user"></i>
+        <a onclick="document.getElementById('profile').style.display='block'" class="w3-bar-item w3-button"><i
+            class="fa fa-user"></i>
           <?php echo strtoupper($_SESSION['uid']) ?>
         </a>
         <?php endif; ?>
@@ -53,18 +54,6 @@ if (!empty($_COOKIE['uid'])) {
       </a>
     </div>
   </div>
-
-  <!-- Sidebar on small screens when clicking the menu icon -->
-  <nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large"
-    style="display:none" id="mySidebar">
-    <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close X</a>
-    <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">ABOUT</a>
-    <a href="#forum" onclick="w3_close()" class="w3-bar-item w3-button">Forum</a>
-    <!--show account-->
-    <a onclick="w3_close(); document.getElementById('sign-in').style.display='block'" class="w3-bar-item w3-button">SIGN
-      IN</a>
-    <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">CONTACT</a>
-  </nav>
 
   <!-- Header with full-height image -->
   <header class="bgimg-1 w3-display-container w3-grayscale-min" id="home">
@@ -320,6 +309,52 @@ if (!empty($_COOKIE['uid'])) {
     </form>
   </div>
 
+  <!-- Profile Section-->
+  <div id="profile" name="profile" class="w3-modal modal">
+    <!-- Modal Content -->
+    <form id="profileUpdate" name="profileUpdate" class="w3-modal-content w3-animate-opacity modal-content"
+      action="scripts/update.php" method="post" autocomplete="off">
+      <div class="w3-container">
+        <span
+          onclick="document.getElementById('profile').style.display='none';"
+          class="modal-back" title="Back Modal">&times;</span>
+      </div>
+
+      <div class="w3-container modal-container modal-container-last">
+        <label class="modal-label" for="uid"><b>User ID: <u><?php echo $_SESSION['uid'] ?></u></b></label><br>
+      </div>
+
+      <div class="w3-container modal-container">
+        <label class="modal-label" for="password"><b>Password</b></label><br>
+        <input class="modal-input" type="password" placeholder="Enter Your New Password" name="password" required><br>
+      </div>
+
+      <div class="w3-container modal-container">
+        <label class="modal-label" for="username"><b>Nick Name</b></label><br>
+        <input class="modal-input" type="text" placeholder="Enter your New Nick Name" name="username" required><br>
+      </div>
+
+      <div class="w3-container modal-container">
+        <label class="modal-label" for="email"><b>E-mail</b></label><br>
+        <input class="modal-input" type="email" placeholder="Enter Your New E-mail" name="email" required><br>
+      </div>
+
+      <div class="w3-container modal-container">
+      <?php if ((!empty($_SESSION['uid'])) && ($_SESSION['uid'] == 'admin')): ?>
+        <button disabled class="w3-button modal-button" type="submit">Change</button><br>
+      <?php else: ?>
+        <button enabled class="w3-button modal-button" type="submit">Change</button><br>
+      <?php endif; ?>
+      </div>
+      
+      <div class="w3-container modal-container">
+        <button onclick="signout();" style="background-color: red;" class="w3-button modal-button" type="submit">LOG OUT</button>
+      </div>
+
+      <div class="w3-container modal-container"></div>
+    </form>
+  </div>
+
   <!-- Add Section-->
   <div id="add" name="add" class="w3-modal modal">
     <!-- Modal Content -->
@@ -377,6 +412,7 @@ if (!empty($_COOKIE['uid'])) {
       xhttp.open("GET", "scripts/get-forum.php");
       xhttp.send();
     });
+
 
     function myforum() {
       const xhttp = new XMLHttpRequest();
@@ -470,6 +506,36 @@ if (!empty($_COOKIE['uid'])) {
       });
 
     });
+
+    $("#profileUpdate").submit(function (event) {
+
+      event.preventDefault();
+      var $form = $(this);
+      var $inputs = $form.find("input, select, button, textarea, checkbox");
+      var serializedData = $form.serialize();
+      $inputs.prop("disabled", true);
+
+      // Fire off the request
+      request = $.ajax({
+        url: "scripts/update.php",
+        type: "post",
+        data: serializedData
+      });
+
+      request.done(function (response) {
+        if (response == '"You have successfully registered, you can now login!"') {
+          window.location.reload();
+        }
+        window.alert(response);
+      });
+
+      request.always(function () {
+        // Reenable the inputs
+        $inputs.prop("disabled", false);
+      });
+
+    });
+
 
     function signout() {
       document.cookie = "uid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
@@ -589,7 +655,7 @@ if (!empty($_COOKIE['uid'])) {
 
       event.preventDefault();
       var $inp = document.getElementById('inp').value;
-      const xhttp = new XMLHttpRequest();
+      const xhttp = equest();
       xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
           document.getElementById("forum-content").innerHTML = this.responseText;

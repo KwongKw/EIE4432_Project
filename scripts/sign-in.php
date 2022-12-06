@@ -4,12 +4,13 @@ require('db.php');
 if (!isset($_POST['uid'], $_POST['password'])) {
     // Could not get the data that should have been sent.
     echo json_encode("Please complete the registration form");
+    die();
 }
 // Make sure the submitted registration values are not empty.
 if (empty($_POST['uid'] || $_POST['password'])) {
     // One or more values are empty.
     echo json_encode("Please complete the registration form");
-
+    die();
 }
 
 // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
@@ -46,12 +47,14 @@ if ($stmt = $con->prepare('SELECT uid, password FROM UserRecords WHERE uid = ?')
         } else {
             // Incorrect password
             echo json_encode("Incorrect username and/or password!");
+            die();
         }
     } else {
         // Incorrect username
         echo json_encode("Incorrect username and/or password!");
+        die();
     }
-
     $stmt->close();
+    die();
 }
 ?>

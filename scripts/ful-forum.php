@@ -6,11 +6,13 @@ require("db.php");
 if (!isset($_POST['response'])) {
     // Could not get the data that should have been sent.
     echo json_encode("Please complete the registration form");
+    die();
 }
 // Make sure the submitted registration values are not empty.
 if (empty($_POST['response'])) {
     // One or more values are empty.
     echo json_encode("Please complete the registration form");
+    die();
 }
 
 $sql = "UPDATE ForumRecords SET `response` = '". $_POST['response'] ."' WHERE id = '". $_POST["id"] ."'";
@@ -24,6 +26,7 @@ if ($con->query($sql) == TRUE) {
     }
 } else {
     echo json_encode("Error updating record: ");
+    die();
 }
 $con->close();
 ?>

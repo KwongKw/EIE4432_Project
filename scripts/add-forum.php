@@ -26,5 +26,6 @@ if ($stmt = $con->prepare('INSERT INTO ForumRecords (id, uid, topic, description
 } else {
     // Something is wrong with the sql statement, check to make sure accounts table exists with all 3 fields.
     echo json_encode("Could not prepare statement!");
+    die();
 }
 ?>
