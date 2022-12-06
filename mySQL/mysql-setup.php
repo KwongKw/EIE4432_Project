@@ -29,22 +29,22 @@ $createUserRecordsTable = "CREATE TABLE UserRecords (
  ) ENGINE='MyISAM'  DEFAULT CHARSET='latin1'";
 
 $addUserRecords = "REPLACE INTO UserRecords (`uid`, `password`, `username`, `email`, `birthday`, `gender`) VALUES
-( 'admin'  , 'adminpass' , 'admin' , 'admin@example.com'  , 0 , 'O'),
-( 'Tom101' , '12345'     , 'Tom'   , 'tom101@gmail.com'   , 0 , 'M'),
-( 'Eric35' , '12345'     , 'Eric'  , 'eric35@gmail.com'   , 0 , 'M'),
-( 'Mary33' , '12345'     , 'Mary'  , 'mary33@gmail.com'   , 0 , 'F'),
-( 'Tom108' , '12345'     , 'Tom'   , 'tom108@hotmail.com' , 0 , 'M'),
-( 'Joex77' , '12345'     , 'Joe'   , 'joe777@gmail.com'   , 0 , 'M'),
-( 'Amy335' , '12345'     , 'Amy'   , 'may335@gmail.com'   , 0 , 'F'),
-( 'David5' , '12345'     , 'David' , 'davidd@gmail.com'   , 0 , 'M'),
-( 'Keith3' , '12345'     , 'Keith' , 'keith3@gmail.com'   , 0 , 'M');";
+('admin', 'adminpass', 'admin', 'admin@example.com', '2000-01-01', 'O'),
+('Tom101', '12345', 'Tom', 'tom101@gmail.com', '2000-02-07', 'M'),
+('Eric35', '12345', 'Eric', 'eric35@gmail.com', '2000-01-09', 'M'),
+('Mary33', '12345', 'Mary', 'mary33@gmail.com', '2010-04-20', 'F'),
+('Tom108', '12345', 'Tom', 'tom108@hotmail.com', '2007-12-11', 'M'),
+('Joex77', '12345', 'Joe', 'joe777@gmail.com', '2003-10-08', 'M'),
+('Amy335', '12345', 'Amy', 'may335@gmail.com', '1997-12-02', 'F'),
+('David5', '12345', 'David', 'davidd@gmail.com', '2005-12-06', 'M'),
+('Keith3', '12345', 'Keith', 'keith3@gmail.com', '2001-08-09', 'M');";
 
 $dropForumRecordsTable = "DROP TABLE IF EXISTS ForumRecords";
 
 $createForumRecordsTable = "CREATE TABLE ForumRecords (
   `id` int NOT NULL AUTO_INCREMENT,
   `uid` varchar(20) NOT NULL,
-  `topic` varchar(50) NOT NULL,
+  `type` varchar(4) NOT NULL,
   `description` varchar(200) NOT NULL,
   `ruid` varchar(20),
   `response` varchar(200),
@@ -96,8 +96,8 @@ if (!$result) {
               print("<html><head><title>MySQL Setup</title></head>
 							<body><h1>MySQL Setup: SUCCESS!</h1><p>Created MySQL user <strong>wbip</strong> with 
 							password <strong>wbip123</strong>, with all privileges on the 
-							<strong>UserRecords</strong> database.</p><p>Created tables <strong>ForumRecords</strong> 
-							and <strong>timesheet</strong> in the 
+							<strong>UserRecords</strong> database.</p><p>Created tables <strong>UserRecords</strong> 
+							and <strong>ForumRecords</strong> in the 
 							<strong>test</strong> database.</p>
 							</body></html>");
             }
