@@ -21,7 +21,8 @@ while ($row = mysqli_fetch_assoc($stmt)) { // Important line !!!
         echo '<div class="w3-container modal-container-forum">
     <label class="modal-label" for="response"><b>Response</b></label><br>
     <textarea rows="6" cols="105" placeholder="Describe on something that can help on finding your lost item"
-      name="description" required></textarea><br>
+      name="response" required></textarea><br>
+    <input type="hidden" name="id" value='. $row['id'] .'>
     </div>
     <div class="w3-container modal-container-last">
     <button class="w3-button modal-button" type="submit" style="margin-bottom: 20px">Submit</button>

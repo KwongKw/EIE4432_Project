@@ -355,8 +355,8 @@ if (!empty($_COOKIE['uid'])) {
   <!-- Show Section-->
   <div id="show" name="show" class="w3-modal modal">
     <!-- Modal Content -->
-    <form id="showforum" name="showforum" class="w3-modal-content w3-animate-opacity forum-modal-content"
-      action="scripts/add-forum.php" method="post" autocomplete="off">
+    <form id="fulforum" name="fulforum" class="w3-modal-content w3-animate-opacity forum-modal-content"
+      action="scripts/ful-forum.php" method="post" autocomplete="off">
       <div class="w3-container">
         <span onclick="document.getElementById('show').style.display='none';" class="modal-back"
           title="Back Modal">&times;</span>
@@ -483,6 +483,35 @@ if (!empty($_COOKIE['uid'])) {
 
     });
 
+    $("#fulforum").submit(function (event) {
+
+      event.preventDefault();
+      var $form = $(this);
+      var $inputs = $form.find("input, select, button, textarea, checkbox");
+      var serializedData = $form.serialize();
+      $inputs.prop("disabled", true);
+
+      // Fire off the request
+      request = $.ajax({
+        url: "scripts/ful-forum.php",
+        type: "post",
+        data: serializedData
+      });
+
+      request.done(function (response) {
+        if (response == '"Record updated successfully"') {
+          window.location.reload();
+        }
+        window.alert(response);
+      });
+
+      request.always(function () {
+        // Reenable the inputs
+        $inputs.prop("disabled", false);
+      });
+
+    });
+
     // Toggle between showing and hiding the sidebar when clicking the menu icon
     var mySidebar = document.getElementById("mySidebar");
 
@@ -500,14 +529,14 @@ if (!empty($_COOKIE['uid'])) {
     }
 
     // Get the modal
-    var modals = ['sign-in','sign-up','add','show'];
+    var modals = ['sign-in', 'sign-up', 'add', 'show'];
 
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function (event) {
       modals.forEach(modal => {
         if (event.target == document.getElementById(modal)) {
           document.getElementById(modal).style.display = "none";
-      }
+        }
       });
     }
 
