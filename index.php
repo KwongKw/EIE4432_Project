@@ -1,5 +1,4 @@
 <?php
-
 unset($_SESSION['uid']);
 unset($_SESSION['password']);
 unset($_SESSION['username']);
@@ -353,6 +352,22 @@ if (!empty($_COOKIE['uid'])) {
     </form>
   </div>
 
+  <!-- Show Section-->
+  <div id="show" name="show" class="w3-modal modal">
+    <!-- Modal Content -->
+    <form id="showforum" name="showforum" class="w3-modal-content w3-animate-opacity forum-modal-content"
+      action="scripts/add-forum.php" method="post" autocomplete="off">
+      <div class="w3-container">
+        <span onclick="document.getElementById('show').style.display='none';" class="modal-back"
+          title="Back Modal">&times;</span>
+      </div>
+
+      <div id="forum-detail" name="forum-detail" class="w3-container modal-container">
+      </div>
+
+    </form>
+  </div>
+
   <script>
 
     $(function () {
@@ -371,7 +386,6 @@ if (!empty($_COOKIE['uid'])) {
       var captionText = document.getElementById("caption");
       captionText.innerHTML = element.alt;
     }
-
 
     $("#signin").submit(function (event) {
 
@@ -459,7 +473,7 @@ if (!empty($_COOKIE['uid'])) {
         if (response == '"Upload Success, please wait patiently"') {
           window.location.reload();
         }
-          window.alert(response);
+        window.alert(response);
       });
 
       request.always(function () {
@@ -486,21 +500,25 @@ if (!empty($_COOKIE['uid'])) {
     }
 
     // Get the modal
-    var modal1 = document.getElementById('sign-in');
-    var modal2 = document.getElementById('sign-up');
-    var modal2 = document.getElementById('add');
+    var modals = ['sign-in','sign-up','add','show'];
 
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function (event) {
-      if (event.target == modal1) {
-        modal1.style.display = "none";
+      modals.forEach(modal => {
+        if (event.target == document.getElementById(modal)) {
+          document.getElementById(modal).style.display = "none";
       }
-      if (event.target == modal2) {
-        modal2.style.display = "none";
+      });
+    }
+
+    function detail(id) {
+      document.getElementById('show').style.display = 'block';
+      const xhttp = new XMLHttpRequest();
+      xhttp.onload = function () {
+        document.getElementById("forum-detail").innerHTML = this.responseText;
       }
-      if (event.target == modal3) {
-        modal3.style.display = "none";
-      }
+      xhttp.open("GET", "scripts/get-detail.php?q=" + id);
+      xhttp.send();
     }
 
   </script>
