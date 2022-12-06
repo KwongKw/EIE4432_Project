@@ -91,19 +91,36 @@ if (!empty($_COOKIE['uid'])) {
     <div class="w3-row w3-centered">
       <div class="col-lg-6">
         <div class="mb-3">
+          <?php if ((!empty($_SESSION['uid'])) && ($_SESSION['uid'] == 'admin')): ?>
+          <h4 class="forum-title"><b>Panel</b></h4>
+          <?php else: ?>
           <h4 class="forum-title"><b>FORUM</b></h4>
+          <?php endif; ?>
         </div>
       </div>
       <div class="col-md-6">
         <div class="w3-right-align" style="padding-top: 20px;">
           <div>
-            <?php if (empty($_SESSION['uid'])): ?>
-            <a onclick="alert('Please Login First')" class="w3-button forum-button"><i class="fa fa-dropbox"></i> Add
-              New</a>
-            <?php else: ?>
-            <a onclick="document.getElementById('add').style.display='block'" class="w3-button forum-button"><i
-                class="fa fa-dropbox"></i> Add New</a>
-            <?php endif; ?>
+            <form name="search" id="search" action="scripts/search.php" method="post" autocomplete="off">
+              <?php if ((!empty($_SESSION['uid'])) && ($_SESSION['uid'] == 'admin')): ?>
+              <input style="width: 30%" type="text" placeholder="Search with ID" id="inp" name="inp">
+              <button class="w3-button forum-button" type="submit">Search</button>
+              <a onclick="seperateforum()" class="w3-button forum-button"><i class="fa fa-gg-circle"></i> Seperated</a>
+              <?php endif; ?>
+              <a onclick="defaultforum()" class="w3-button forum-button"><i class="fa fa-gg-circle"></i> Default</a>
+              <?php if (empty($_SESSION['uid'])): ?>
+              <a onclick="alert('Please Login First')" class="w3-button forum-button"><i class="fa fa-user-circle"></i>
+                My
+                Notice</a>
+              <a onclick="alert('Please Login First')" class="w3-button forum-button"><i class="fa fa-dropbox"></i> Add
+                New</a>
+              <?php else: ?>
+              <a onclick="myforum()" class="w3-button forum-button"><i class="fa fa-user-circle"></i> My
+                Notice</a>
+              <a onclick="document.getElementById('add').style.display='block'" class="w3-button forum-button"><i
+                  class="fa fa-dropbox"></i> Add New</a>
+              <?php endif; ?>
+            </form>
           </div>
         </div>
       </div>
@@ -352,19 +369,46 @@ if (!empty($_COOKIE['uid'])) {
 
     $(function () {
       const xhttp = new XMLHttpRequest();
-      xhttp.onload = function () {
-        document.getElementById("forum-content").innerHTML = this.responseText;
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("forum-content").innerHTML = this.responseText;
+        }
       }
       xhttp.open("GET", "scripts/get-forum.php");
       xhttp.send();
     });
 
-    // Modal Image Gallery
-    function onClick(element) {
-      document.getElementById("img01").src = element.src;
-      document.getElementById("modal01").style.display = "block";
-      var captionText = document.getElementById("caption");
-      captionText.innerHTML = element.alt;
+    function myforum() {
+      const xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("forum-content").innerHTML = this.responseText;
+        }
+      }
+      xhttp.open("GET", "scripts/my-forum.php");
+      xhttp.send();
+    }
+
+    function defaultforum() {
+      const xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("forum-content").innerHTML = this.responseText;
+        }
+      }
+      xhttp.open("GET", "scripts/get-forum.php");
+      xhttp.send();
+    }
+
+    function seperateforum() {
+      const xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("forum-content").innerHTML = this.responseText;
+        }
+      }
+      xhttp.open("GET", "scripts/seperate-forum.php");
+      xhttp.send();
     }
 
     $("#signin").submit(function (event) {
@@ -541,6 +585,19 @@ if (!empty($_COOKIE['uid'])) {
       window.location.reload();
     }
 
+    $("#search").submit(function (event) {
+
+      event.preventDefault();
+      var $inp = document.getElementById('inp').value;
+      const xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("forum-content").innerHTML = this.responseText;
+        }
+      }
+      xhttp.open("GET", "scripts/search.php?q=" + $inp);
+      xhttp.send();
+    });
   </script>
 
 </body>
