@@ -17,9 +17,8 @@ if (!empty($_COOKIE['uid'])) {
   <link rel="stylesheet" href="styles/font-awesome.min.css">
   <link rel="stylesheet" href="styles/w3.css">
   <link rel="stylesheet" href="styles/style.css">
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="scripts/jquery-3.6.0.min.js"></script>
+  <script src="scripts/forum.js"></script>
 </head>
 
 <body>
@@ -63,8 +62,6 @@ if (!empty($_COOKIE['uid'])) {
     <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">CONTACT</a>
   </nav>
 
-  <iframe name="dummy" style="display:none;"></iframe>
-
   <!-- Header with full-height image -->
   <header class="bgimg-1 w3-display-container w3-grayscale-min" id="home">
     <div class="w3-display-right w3-text-white" style="text-align: right; padding:48px">
@@ -84,6 +81,83 @@ if (!empty($_COOKIE['uid'])) {
       <i class="fa fa-linkedin w3-hover-opacity"></i>
     </div>
   </header>
+
+  <!-- Forum Section-->
+  <div id="forum" name="forum" style="padding:128px 16px" class="w3-container">
+    <div class="w3-row w3-centered">
+      <div class="col-lg-6">
+        <div class="mb-3">
+          <h4 class="forum-title">Records <span class="text-muted fw-normal ms-2">(???)</span></h5>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="w3-right-align" style="padding-top: 20px;">
+          <div>
+            <a href="#forum" data-bs-toggle="modal" data-bs-target=".add-new" class="w3-button forum-button"><i class="fa fa-dropbox"></i> Add New</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="">
+          <div class="table-responsive">
+            <table class="table table-nowrap align-middle table-borderless" style="padding-top: 20px;">
+              <thead>
+                <tr>
+                  <th scope="col">Topic</th>
+                  <th scope="col">Position</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Time</th>
+                  <th scope="col" style="width: 200px;">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><a>Simon Ryles</a></td>
+                  <td><span class="badge badge-soft-success mb-0">Full Stack Developer</span></td>
+                  <td>SimonRyles@minible.com</td>
+                  <td>125</td>
+                  <td>
+                    <ul class="list-inline">
+                      <li class="list-inline-item">
+                        <a href="javascript:void(0);"><i class="fa fa-arrow-circle-o-up"></i></a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a href="javascript:void(0);"><i class="fa fa-hand-o-up"></i></a>
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="w3-row w3-centered">
+      <div class="col-lg-6">
+        <div>
+          <p class="mb-sm-0">Showing 1 to 10 of ?? entries</p>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="w3-right-align">
+          <ul class="pagination mb-sm-0">
+            <li class="page-item disabled">
+              <a href="#" class="page-link"><i class="mdi mdi-chevron-left"></i></a>
+            </li>
+            <li class="page-item active"><a href="#" class="page-link">1</a></li>
+            <li class="page-item"><a href="#" class="page-link">2</a></li>
+
+            <li class="page-iten">
+              <a href="#" class="page-link"><i class="mdi mdi-chevron-right"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- About Section -->
   <div class="w3-container" style="padding:128px 16px" id="about">
@@ -115,13 +189,16 @@ if (!empty($_COOKIE['uid'])) {
     <div style="margin-top:48px">
       <p><i class="fa fa-map-marker fa-fw w3-xxlarge w3-margin-right"></i> PolyU, HK</p>
       <p><i class="fa fa-phone fa-fw w3-xxlarge w3-margin-right"></i> Phone: +852 54761931</p>
-      <p><i class="fa fa-envelope fa-fw w3-xxlarge w3-margin-right"> </i> Email: 19067393d@connect.polyu.hk</p>
+      <p><i class="fa fa-envelope fa-fw w3-xxlarge w3-margin-right"> </i> Email:
+        19067393d@connect.polyu.hk</p>
       <br>
       <form action="/action_page.php" target="_blank">
         <p><input class="w3-input w3-border" type="text" placeholder="Name" required name="Name"></p>
         <p><input class="w3-input w3-border" type="text" placeholder="Email" required name="Email"></p>
-        <p><input class="w3-input w3-border" type="text" placeholder="Subject" required name="Subject"></p>
-        <p><input class="w3-input w3-border" type="text" placeholder="Message" required name="Message"></p>
+        <p><input class="w3-input w3-border" type="text" placeholder="Subject" required name="Subject">
+        </p>
+        <p><input class="w3-input w3-border" type="text" placeholder="Message" required name="Message">
+        </p>
         <p>
           <button class="w3-button w3-black" type="submit">
             <i class="fa fa-paper-plane"></i> SEND MESSAGE
@@ -133,7 +210,8 @@ if (!empty($_COOKIE['uid'])) {
 
   <!-- Footer -->
   <footer class="w3-center w3-black w3-padding-64">
-    <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+    <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the
+      top</a>
     <div class="w3-xlarge w3-section">
       <i class="fa fa-facebook-official w3-hover-opacity"></i>
       <i class="fa fa-instagram w3-hover-opacity"></i>
@@ -145,12 +223,12 @@ if (!empty($_COOKIE['uid'])) {
     <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank"
         class="w3-hover-text-green">w3.css</a></p>
   </footer>
-  
+
   <!-- Sign in Section-->
   <div name="sign-in" id="sign-in" class="w3-modal modal">
     <!-- Modal Content -->
     <form name="signin" id="signin" class="w3-modal-content w3-animate-opacity modal-content"
-      action="scripts/sign-in.php" method="post" target="dummy">
+      action="scripts/sign-in.php" method="post" autocomplete="off">
       <div class="w3-container">
         <span onclick="document.getElementById('sign-in').style.display='none'" class="modal-close"
           title="Close Modal">&times;</span>
@@ -174,7 +252,8 @@ if (!empty($_COOKIE['uid'])) {
       <div class="w3-container modal-container">
         <button class="w3-button modal-button" type="submit">Login</button>
         <div class="w3-half">
-          <label><input type="checkbox" checked="checked" id="remember" name="remember"> Remember me</label>
+          <label><input type="checkbox" checked="checked" id="remember" name="remember"> Remember
+            me</label>
         </div>
 
         <div class="w3-half" style="text-align: right">
