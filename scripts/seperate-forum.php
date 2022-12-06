@@ -1,5 +1,17 @@
 <?php
 session_start();
+echo '              
+<thead>
+<tr>
+  <th scope="col">Case ID</th>
+  <th scope="col">User ID</th>
+  <th scope="col">Topic</th>
+  <th scope="col">Description</th>
+  <th scope="col">Response</th>
+  <th scope="col" style="width: 200px;">Action</th>
+</tr>
+</thead>
+<tbody >';
 
 require("db.php");
 $sql = "SELECT `id`, `uid`, `topic`, `description`, `response` FROM ForumRecords WHERE `ruid` != ''";

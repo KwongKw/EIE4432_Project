@@ -14,7 +14,7 @@ if (empty($_POST['uid'] || $_POST['password'])) {
 }
 
 // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
-if ($stmt = $con->prepare('SELECT uid, password FROM UserRecords WHERE uid = ?')) {
+if ($stmt = $con->prepare('SELECT uid, password, username FROM UserRecords WHERE uid = ?')) {
     // Bind parameters (s = string, i = int, b = blob, etc), in our case the username is a string so we use "s"
     $stmt->bind_param('s', $_POST['uid']);
     $stmt->execute();
@@ -22,7 +22,7 @@ if ($stmt = $con->prepare('SELECT uid, password FROM UserRecords WHERE uid = ?')
     $stmt->store_result();
 
     if ($stmt->num_rows > 0) {
-        $stmt->bind_result($username, $password);
+        $stmt->bind_result($uid, $password, $username);
         $stmt->fetch();
         // Account exists, now we verify the password.
         // Note: remember to use password_hash in your registration file to store the hashed passwords.
@@ -31,7 +31,7 @@ if ($stmt = $con->prepare('SELECT uid, password FROM UserRecords WHERE uid = ?')
             // Create sessions, so we know the user is logged in, they basically act like cookies but remember the data on the server.
             $_SESSION['uid'] = $_POST['uid'];
             $_SESSION['password'] = $_POST['password'];
-            $_SESSION['name'] = $username;
+            $_SESSION['username'] = $username;
 
             //cookies
             if(isset($_POST["remember"])) {
@@ -46,12 +46,12 @@ if ($stmt = $con->prepare('SELECT uid, password FROM UserRecords WHERE uid = ?')
             echo json_encode("Success");
         } else {
             // Incorrect password
-            echo json_encode("Incorrect username and/or password!");
+            echo json_encode("Incorrect username and password!");
             die();
         }
     } else {
         // Incorrect username
-        echo json_encode("Incorrect username and/or password!");
+        echo json_encode("Incorrect username and password!");
         die();
     }
     $stmt->close();

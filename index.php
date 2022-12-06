@@ -87,29 +87,30 @@ if (!empty($_COOKIE['uid'])) {
           <?php endif; ?>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-5">
         <div class="w3-right-align" style="padding-top: 20px;">
           <div>
             <form name="search" id="search" action="scripts/search.php" method="post" autocomplete="off">
               <?php if ((!empty($_SESSION['uid'])) && ($_SESSION['uid'] == 'admin')): ?>
               <input style="width: 30%" type="text" placeholder="Search with ID" id="inp" name="inp">
               <button class="w3-button forum-button" type="submit">Search</button>
-              <a onclick="seperateforum()" class="w3-button forum-button"><i class="fa fa-gg-circle"></i> Seperated</a>
-              <?php endif; ?>
-              <a onclick="defaultforum()" class="w3-button forum-button"><i class="fa fa-gg-circle"></i> Default</a>
-              <?php if (empty($_SESSION['uid'])): ?>
-              <a onclick="alert('Please Login First')" class="w3-button forum-button"><i class="fa fa-user-circle"></i>
-                My
-                Notice</a>
-              <a onclick="alert('Please Login First')" class="w3-button forum-button"><i class="fa fa-dropbox"></i> Add
-                New</a>
-              <?php else: ?>
-              <a onclick="myforum()" class="w3-button forum-button"><i class="fa fa-user-circle"></i> My
-                Notice</a>
-              <a onclick="document.getElementById('add').style.display='block'" class="w3-button forum-button"><i
-                  class="fa fa-dropbox"></i> Add New</a>
-              <?php endif; ?>
             </form>
+            <a onclick="userforum()" class="w3-button forum-button"><i class="fa fa-gg-circle"></i> Users</a>
+            <a onclick="seperateforum()" class="w3-button forum-button"><i class="fa fa-gg-circle"></i> Seperated</a>
+            <?php endif; ?>
+            <a onclick="defaultforum()" class="w3-button forum-button"><i class="fa fa-gg-circle"></i> Default</a>
+            <?php if (empty($_SESSION['uid'])): ?>
+            <a onclick="alert('Please Login First')" class="w3-button forum-button"><i class="fa fa-user-circle"></i>
+              My
+              Notice</a>
+            <a onclick="alert('Please Login First')" class="w3-button forum-button"><i class="fa fa-dropbox"></i> Add
+              New</a>
+            <?php else: ?>
+            <a onclick="myforum()" class="w3-button forum-button"><i class="fa fa-user-circle"></i> My
+              Notice</a>
+            <a onclick="document.getElementById('add').style.display='block'" class="w3-button forum-button"><i
+                class="fa fa-dropbox"></i> Add New</a>
+            <?php endif; ?>
           </div>
         </div>
       </div>
@@ -118,19 +119,8 @@ if (!empty($_COOKIE['uid'])) {
       <div class="col-lg-12">
         <div class="">
           <div class="table-responsive">
-            <table class="table table-nowrap align-middle table-borderless" style="padding-top: 20px;">
-              <thead>
-                <tr>
-                  <th scope="col">Case ID</th>
-                  <th scope="col">User ID</th>
-                  <th scope="col">Topic</th>
-                  <th scope="col">Description</th>
-                  <th scope="col">Response</th>
-                  <th scope="col" style="width: 200px;">Action</th>
-                </tr>
-              </thead>
-              <tbody id="forum-content" name="forum-content">
-              </tbody>
+            <table id="forum-content" name="forum-content" class="table table-nowrap align-middle table-borderless"
+              style="padding-top: 20px;">
             </table>
           </div>
         </div>
@@ -236,7 +226,8 @@ if (!empty($_COOKIE['uid'])) {
         </div>
 
         <div class="w3-half" style="text-align: right">
-          <span class="password">Forgot <a href="#">password?</a></span>
+          <span class="password"><a onclick="document.getElementById('forgot').style.display='block'">Forgot your
+              password?</a></span>
         </div>
       </div>
 
@@ -315,40 +306,84 @@ if (!empty($_COOKIE['uid'])) {
     <form id="profileUpdate" name="profileUpdate" class="w3-modal-content w3-animate-opacity modal-content"
       action="scripts/update.php" method="post" autocomplete="off">
       <div class="w3-container">
-        <span
-          onclick="document.getElementById('profile').style.display='none';"
-          class="modal-back" title="Back Modal">&times;</span>
+        <span onclick="document.getElementById('profile').style.display='none';" class="modal-back"
+          title="Back Modal">&times;</span>
       </div>
 
       <div class="w3-container modal-container modal-container-last">
-        <label class="modal-label" for="uid"><b>User ID: <u><?php echo $_SESSION['uid'] ?></u></b></label><br>
+        <label class="modal-label" for="uid"><b>User ID: <u>
+              <?php echo $_SESSION['uid'] ?>
+            </u></b></label><br>
       </div>
 
       <div class="w3-container modal-container">
         <label class="modal-label" for="password"><b>Password</b></label><br>
-        <input class="modal-input" type="password" placeholder="Enter Your New Password" name="password" required><br>
+        <input class="modal-input" type="password" placeholder="Enter Your New Password" name="password"><br>
       </div>
 
       <div class="w3-container modal-container">
         <label class="modal-label" for="username"><b>Nick Name</b></label><br>
-        <input class="modal-input" type="text" placeholder="Enter your New Nick Name" name="username" required><br>
+        <input class="modal-input" type="text" placeholder="Enter your New Nick Name" name="username"><br>
       </div>
 
       <div class="w3-container modal-container">
         <label class="modal-label" for="email"><b>E-mail</b></label><br>
-        <input class="modal-input" type="email" placeholder="Enter Your New E-mail" name="email" required><br>
+        <input class="modal-input" type="email" placeholder="Enter Your New E-mail" name="email"><br>
       </div>
 
       <div class="w3-container modal-container">
-      <?php if ((!empty($_SESSION['uid'])) && ($_SESSION['uid'] == 'admin')): ?>
+        <?php if ((!empty($_SESSION['uid'])) && ($_SESSION['uid'] == 'admin')): ?>
         <button disabled class="w3-button modal-button" type="submit">Change</button><br>
-      <?php else: ?>
+        <?php else: ?>
         <button enabled class="w3-button modal-button" type="submit">Change</button><br>
-      <?php endif; ?>
+        <?php endif; ?>
       </div>
-      
+
       <div class="w3-container modal-container">
-        <button onclick="signout();" style="background-color: red;" class="w3-button modal-button" type="submit">LOG OUT</button>
+        <button onclick="signout();" style="background-color: red;" class="w3-button modal-button" type="submit">LOG
+          OUT</button>
+      </div>
+
+      <div class="w3-container modal-container"></div>
+    </form>
+  </div>
+
+  <!-- Forgot Section-->
+  <div id="forgot" name="forgot" class="w3-modal modal">
+    <!-- Modal Content -->
+    <form id="profileForgot" name="profileForgot" class="w3-modal-content w3-animate-opacity modal-content"
+      action="scripts/update.php" method="post" autocomplete="off">
+      <div class="w3-container">
+        <span onclick="document.getElementById('profile').style.display='none';" class="modal-back"
+          title="Back Modal">&times;</span>
+      </div>
+
+      <div class="w3-container modal-container modal-container-last">
+        <label class="modal-label" for="uid"><b>User ID</b></label><br>
+        <input class="modal-input" type="text" placeholder="Enter Your User ID" name="uid"><br>
+      </div>
+
+      <div class="w3-container modal-container">
+        <label class="modal-label" for="password"><b>Password</b></label><br>
+        <input class="modal-input" type="password" placeholder="Enter Your New Password" name="password"><br>
+      </div>
+
+      <div class="w3-container modal-container">
+        <label class="modal-label" for="username"><b>Nick Name</b></label><br>
+        <input class="modal-input" type="text" placeholder="Enter your New Nick Name" name="username"><br>
+      </div>
+
+      <div class="w3-container modal-container">
+        <label class="modal-label" for="email"><b>E-mail</b></label><br>
+        <input class="modal-input" type="email" placeholder="Enter Your New E-mail" name="email"><br>
+      </div>
+
+      <div class="w3-container modal-container">
+        <?php if ((!empty($_SESSION['uid'])) && ($_SESSION['uid'] == 'admin')): ?>
+        <button disabled class="w3-button modal-button" type="submit">Change</button><br>
+        <?php else: ?>
+        <button enabled class="w3-button modal-button" type="submit">Change</button><br>
+        <?php endif; ?>
       </div>
 
       <div class="w3-container modal-container"></div>
@@ -447,6 +482,17 @@ if (!empty($_COOKIE['uid'])) {
       xhttp.send();
     }
 
+    function userforum() {
+      const xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("forum-content").innerHTML = this.responseText;
+        }
+      }
+      xhttp.open("GET", "scripts/user-forum.php");
+      xhttp.send();
+    }
+
     $("#signin").submit(function (event) {
 
       event.preventDefault();
@@ -536,6 +582,34 @@ if (!empty($_COOKIE['uid'])) {
 
     });
 
+    $("#profileForgot").submit(function (event) {
+
+      event.preventDefault();
+      var $form = $(this);
+      var $inputs = $form.find("input, select, button, textarea, checkbox");
+      var serializedData = $form.serialize();
+      $inputs.prop("disabled", true);
+
+      // Fire off the request
+      request = $.ajax({
+        url: "scripts/update.php",
+        type: "post",
+        data: serializedData
+      });
+
+      request.done(function (response) {
+        if (response == '"You have successfully registered, you can now login!"') {
+          window.location.reload();
+        }
+        window.alert(response);
+      });
+
+      request.always(function () {
+        // Reenable the inputs
+        $inputs.prop("disabled", false);
+      });
+
+    });
 
     function signout() {
       document.cookie = "uid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
@@ -655,7 +729,7 @@ if (!empty($_COOKIE['uid'])) {
 
       event.preventDefault();
       var $inp = document.getElementById('inp').value;
-      const xhttp = equest();
+      const xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
           document.getElementById("forum-content").innerHTML = this.responseText;

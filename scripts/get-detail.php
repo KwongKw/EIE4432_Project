@@ -1,6 +1,5 @@
 <?php
 require("db.php");
-
 $sql = "SELECT * FROM ForumRecords WHERE id = ".$_GET["q"]."";
 $stmt = mysqli_query($con, $sql);
 while ($row = mysqli_fetch_assoc($stmt)) { // Important line !!!
@@ -21,7 +20,7 @@ while ($row = mysqli_fetch_assoc($stmt)) { // Important line !!!
     if (empty($row['response'])) {
         echo '<div class="w3-container modal-container">
     <label class="modal-label" for="response"><b>Response</b></label><br>
-    <textarea class="forum-modal-input" rows="6" placeholder="Describe on something that can help on finding your lost item"
+    <textarea class="forum-modal-input" rows="6" placeholder="Say Congrad to the sad person if you found the item"
       name="response" required></textarea><br>
     <input type="hidden" name="id" value='. $row['id'] .'>
     </div>
